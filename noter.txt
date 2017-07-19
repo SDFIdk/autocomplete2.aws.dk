@@ -1,0 +1,18 @@
+Justering af css i forhold til alternativer. Problemer med nærværende løsning i Bootstrap.
+Hvordan aligner man med input-feltet?
+
+Hvilke parametre kan man bruge i params?
+params: A JavaScript object containing any additional parameters to send to DAWA, e.g. {kommunekode: "101"}.
+
+https://github.com/DanmarksAdresser/dawa-autocomplete2
+Ufuldstændig sætning: "Please notice that https://dawa.aws.dk regularly updates the hosted version of the file to the most recent. You should"
+
+Skal der i dawa-autocomplete2.css ikke fjernes:
+body {
+    font-family: '"Helvetica Neue",Arial,sans-serif';
+} 
+input {
+    font-size: inherit;
+    font-family: inherit;
+}
+Så den kun rummer det der er relevant for dawa-autocomplete2?
