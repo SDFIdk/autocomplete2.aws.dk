@@ -16,3 +16,5 @@ input {
     font-family: inherit;
 }
 Så den kun rummer det der er relevant for dawa-autocomplete2?
+
+Kan man ikke få polyfills via NPM?

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,7 +9,7 @@
     <meta name="author" content="Finn Jordal">
     <link rel="icon" href="favicon.ico">
 
-    <title>DAWA Autocomplete</title>
+    <title>Guide til DAWA Autocomplete</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -36,191 +35,52 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/">Introduktion</a></li>
-            <li class="active"><a href="guide.html">Guide</a></li>
-            <li><a href="#contact">Tidligere version</a></li>
+            <li><a href="index.html">Introduktion</a></li>
+            <li><a href="guide2.html">Guide</a></li>
+            <li class="active"><a href="guide.html">Tidligere version</a></li>
+            <li><a href="om.html">Om</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
     <div class="container">
-      <h1>Trin for trin - guiden</h1>
-      <p class='lead'>Trin for trin guiden viser, hvordan du implemtererer autocomplete indtastning af adresser vha. DAWA Autocomplete i en web applikation.</p>
+      <h1>Guide til DAWA Autocomplete</h1>
+      <p  class="bg-danger">DAWA Autocomplete er ikke den seneste version. Det anbefales, at anvende den seneste version, DAWA Autocomplete2, hvis guide du finder <a href='guide.html'>her</a>.</p>
+      <p class='lead'>Trin for trin guiden viser, hvordan du implementerer autocomplete indtastning af adresser vha. DAWA Autocomplete i en web applikation.</p>
 
-      <h2>Guiden</h2>
-      <p>Guiden viser dig via et eksempel, hvordan du trin for trin etablerer adresseindtastning med autocomplete i din web applikation</p>.
+      <h2>Forudsætninger</h2>
+      <p>Du vil via et lille eksempel blive introduceret til, hvordan du anvender DAWA autocomplete komponent i en web applikation. Du finder <a href='https://github.com/DanmarksAdresser/autocomplete'>autocomplete komponenten og dens dokumentation på GitHub</a>. Guiden forudsætter, at du har kendskab til html, JavaScript og jQuery.</p>.
 
       <h2>Trin 1 - Start</h2>
-      <p>Lav en folder, kaldet Guide, indeholdende to filen. En html fil kaldet index.html:</p>
-      <code class="text-muted">
-        <textarea rows="15" cols="80">
-
-          <!doctype html>
-          <html>
-            <meta charset="utf-8">
-            <head>
-              <title>DAWA autocomplete guide</title>
-              <link href="style.css" rel="stylesheet">
-            </head>
-            <body>
-              <label for='adresse'>Autocomplete af adresse:</label>
-              <input type="text" id="adresse">
-              <p>Valgt adresse: <span id="valgtadresse"/></p>
-            </body>
-          </html>
-        </textarea>
-      </code>
-      <p>En css fil kaldet style.css indholdende:</p>
-
-      <code class="text-muted">
-        <textarea rows="5" cols="80">
-
-          label {
-            color: red;
-          }
-        </textarea>
-      </code>
+      <p>Lav en folder, kaldet Guide, indeholdende følgende html-fil:</p>
+      <pre>&lt;!doctype html&gt;<br/>&lt;html&gt;<br/>  &lt;meta charset="utf-8"&gt;<br/>  &lt;head&gt;<br/>    &lt;title&gt;DAWA autocomplete guide&lt;/title&gt;<br/>  &lt;/head&gt;<br/>  &lt;body&gt;<br/>    &lt;label for='adresse'&gt;Autocomplete af adresse:&lt;/label&gt;<br/>    &lt;input type="text" id="adresse" style="width: 400px;"&gt;<br/>    &lt;p&gt;Valgt adresse: &lt;span id="adresse-choice"/&gt;&lt;/p&gt;<br/>  &lt;/body&gt;<br/>&lt;/html&gt;</pre>
 
       <p>Se index.html i en browser.</p>
 
-      <h2>Trin 2 - Installer DAWA Autocomplete komponenten</h2>
-      <p>DAWA Autocomplete installeres med <a href='https://npmjs.com'>npm</a>. Hvis du ikke har npm installeret, kan du installere npm ved at installere <a href='https://nodejs.org'>node.js</a>. Vælg den aktuelle Long Term Support (LTS) release.</p>
-      <p>DAWA Autocomplete installeres på følgende måde:</p>
-      <p><kbd>npm install dawa-autocomplete2</kbd></p>
-      <p>Der er nu i guide folderen oprettet en folder ved navn node_modules. Denne folder indeholder DAWA Autocomplete komponenten.</p>
+      <h2>Trin 2 - Installer komponenten og dens afhængigheder</h2>
+      <p>Du skal nu hente autocomplete komponenten fra GitHub samt de JavaScript biblioteker, som komponenten er afhængig af. Det drejer sig om jQuery og jQuery-ui. Det kan gøres manuelt, men vi foretrækker at bruge <a href='https://bower.io/'>Bower</a>. Hvis du ikke har bower, kan den hentes ved at følge denne <a href='https://bower.io/#install-bower'>vejledning</a>.</p>
+      <p>Autocomple komponenten og dens afhængigheder hentes ved at kalde følgende (i folderen, som du netop har oprettet):</p>
+      <p><kbd>bower install dawa-autocomplete</kbd></p>
+      <p>Det resulterer i en folder ved navn bower_components i Guide folderen, som indeholder autocomplete komponenten og dens afhængigheder..</p>
 
-      <h2>Trin 3 - Indsæt referencer til autocomplete komponenten</h2>
-      <p>Nu skal vores web applikation tilpasses DAWA Autocomplete komponenten. Først indsættes en reference til komponentens javascript kode. Det gøres ved at indsætte nedenstående i index.html:</p>
+      <h2>Trin 3 - Indsæt referencer til autocomplete komponenten og dens afhængigheder</h2>
+      <p>Forudsætnungen for at vor lille web applikation kan anvende komponenten, er at html-filen refererer til den og dens afhængigheder. Det gøres ved at indsættes det markerede i html-filen.</p>
 
-
-      <code class="text-muted">
-        <textarea rows="5" cols="110">
-
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.min.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
-          <script src="node_modules/dawa-autocomplete2/dist/dawa-autocomplete2.min.js"></script>
-        </textarea>
-      </code>
-
-      <p>Nu indeholder index.html følgende:</p>
-
-      <code class="text-muted">
-        <textarea rows="19" cols="110">
-          
-          <!doctype html>
-          <html>
-            <meta charset="utf-8">
-            <head>
-              <title>DAWA autocomplete guide</title>
-              <link href="style.css" rel="stylesheet">
-            </head>
-            <body>
-              <label for='adresse'>Autocomplete af adresse:</label>
-              <input type="text" id="adresse">
-              <p>Valgt adresse: <span id="valgtadresse"/></p>
-
-              <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.min.js"></script>
-              <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
-              <script src="node_modules/dawa-autocomplete2/dist/dawa-autocomplete2.min.js"></script>
-            </body>
-          </html>
-        </textarea>
-      </code>
-
-      <p>DAWA Autocomplete er baseret på et nyere browser API, så ældre browsere som Internet Explore 11, skal håndteres med de så kaldte polyfills core.min.js og fetch.min.js.</p>
-
-      <p>I style.css indsættes i slutningen følgende DAWA autocomplete specifik css styles:</p>
-
-      <code class="text-muted">
-        <textarea rows="57" cols="110">
-
-.autocomplete-container {
-    /* relative position for at de absolut positionerede forslag får korrekt placering.*/
-    position: relative;
-    width: 100%;
-    max-width: 30em; 
-}
-
-.autocomplete-container input {
-    /* Både input og forslag får samme bredde som omkringliggende DIV */
-    width: 100%;
-    box-sizing: border-box;
-} 
-
-
-.dawa-autocomplete-suggestions {
-    margin: 0.3em 0 0 0;
-    padding: 0;
-    text-align: left;
-    border-radius: 0.3125em;
-    background: #fcfcfc;
-    box-shadow: 0 0.0625em 0.15625em rgba(0,0,0,.15);
-    position: absolute;
-    left: 0;
-    right: 0;
-    z-index: 9999;
-    overflow-y: auto;
-    box-sizing: border-box;
-}
-
-.dawa-autocomplete-suggestions .dawa-autocomplete-suggestion {
-    margin: 0;
-    list-style: none;
-    cursor: pointer;
-    padding: 0.4em 0.6em;
-    color: #333;
-    border: 0.0625em solid #ddd;
-    border-bottom-width: 0;
-}
-
-.dawa-autocomplete-suggestions .dawa-autocomplete-suggestion:first-child {
-    border-top-left-radius: inherit;
-    border-top-right-radius: inherit;
-}
-
-.dawa-autocomplete-suggestions .dawa-autocomplete-suggestion:last-child {
-    border-bottom-left-radius: inherit;
-    border-bottom-right-radius: inherit;
-    border-bottom-width: 0.0625em;
-}
-
-.dawa-autocomplete-suggestions .dawa-autocomplete-suggestion.dawa-selected,
-.dawa-autocomplete-suggestions .dawa-autocomplete-suggestion:hover {
-    background: #f0f0f0;
-}
-
-        </textarea>
-      </code>
+			<pre>&lt;!doctype html&gt;<br/>&lt;html&gt;<br/>  &lt;meta charset="utf-8"&gt;<br/>  &lt;head&gt;<br/>    &lt;title&gt;DAWA autocomplete guide&lt;/title&gt;<br/>  &lt;/head&gt;<br/><mark>  &lt;link rel="stylesheet" href="bower_components/jquery-ui/themes/start/jquery-ui.css"&gt;<br/>  &lt;link rel="stylesheet" href="bower_components/jquery-ui/themes/start/theme.css"&gt;<br/>  &lt;script src="bower_components/jquery/dist/jquery.js"&gt;&lt;/script&gt;<br/>  &lt;script src="bower_components/jquery-ui/jquery-ui.js"&gt;&lt;/script&gt;<br/>  &lt;script src="bower_components/dawa-autocomplete/dawa-autocomplete.js"&gt;&lt;/script&gt;</mark><br/>  &lt;body&gt;<br/>    &lt;label for='adresse'&gt;Autocomplete af adresse:&lt;/label&gt;<br/>    &lt;input type="text" id="adresse" style="width: 400px;"&gt;<br/>    &lt;p&gt;Valgt adresse: &lt;span id="adresse-choice"/&gt;&lt;/p&gt;<br/>  &lt;/body&gt;<br/>&lt;/html&gt;</pre>S
 
       <h2>Trin 4 - Forbind input-feltet med komponenten</h2>
-      <p>Input-feltet skal forbindes med adresse autocomplete funktionaliteten i komponenten. Det gøres ved at oprette script.js filen i guide folderen med følgende indhold:</p>
+      <p>Input-feltet i html-filen skal forbindes med autocomplete-komponenten for at etablere adresse autocomplete funktionalitet. Det sker ved tilføje følgende JavaScript-fil ved navn script.js til Guide-folderen.</p>
 
 
-      <code class="text-muted">
-        <textarea rows="9" cols="110">
+			<pre>$(function() {<br/>  $('#adresse').dawaautocomplete({<br/>    select: function(event, data) {<br/>      $('#adresse-choice').text(data.tekst);<br/>    }<br/>  });<br/>});</pre>
 
-          "use strict"
-
-          dawaAutocomplete.dawaAutocomplete( document.getElementById("adresse"), {
-            select: function(selected) {
-                document.getElementById("valgtadresse").innerHTML= selected.tekst;
-              }
-            });
-        </textarea>
-      </code>
-
-      <p>Lad index.html referer til script.js og indsæt input-feltet i et div-element med klassen autocomplete-container:</p>
-
-      <code class="text-muted">
-        <textarea rows="9" cols="110">
-
-        </textarea>
-      </code>
+      <p>Det er html-filen, som skal anvende ovenstående kode til at etablere forbindelsen mellem input-feltet og autocomplete komponenten, så html-filen skal referere til JavaScript-filen script.js. Det sker på følgende måde:</p>
+      
+			<pre>&lt;!doctype html&gt;<br/>&lt;html&gt;<br/>  &lt;meta charset="utf-8"&gt;<br/>  &lt;head&gt;<br/>    &lt;title&gt;DAWA autocomplete guide&lt;/title&gt;<br/>  &lt;/head&gt;<br/>  &lt;link rel="stylesheet" href="bower_components/jquery-ui/themes/start/jquery-ui.css"&gt;<br/>  &lt;link rel="stylesheet" href="bower_components/jquery-ui/themes/start/theme.css"&gt;<br/>  &lt;script src="bower_components/jquery/dist/jquery.js"&gt;&lt;/script&gt;<br/>  &lt;script src="bower_components/jquery-ui/jquery-ui.js"&gt;&lt;/script&gt;<br/>    &lt;script src="bower_components/dawa-autocomplete/dawa-autocomplete.js"&gt;&lt;/script&gt;<br/>  <mark>&lt;script src="script.js"&gt;&lt;/script&gt;</mark><br/>  &lt;body&gt;<br/>    &lt;label for='adresse'&gt;Autocomplete af adresse:&lt;/label&gt;<br/>    &lt;input type="text" id="adresse" style="width: 400px;"&gt;<br/>    &lt;p&gt;Valgt adresse: &lt;span id="adresse-choice"/&gt;&lt;/p&gt;<br/>  &lt;/body&gt;<br/>&lt;/html&gt;</pre>
 
       <h2>Trin 5 - Prøv</h2>
-      <p>Åbn index.html i en browser. Begynd at indtast en adresse i input-feltet, og du vil blive præsenteret for forslag, som du kan autocomplete.</p>
-      <p>Du kan finde hele eksemplet på <a href='https://github.com/DanmarksAdresser/dawa-autocomplete-guide'>GitHub</a>.</p>
+      <p>Åbn html-filen i en browser. Begynd med at indtaste en adresse i input-feltet, og du vil blive præsenteret for forslag, som du kan autocomplete.</p>
 
     </div><!-- /.container -->
 
