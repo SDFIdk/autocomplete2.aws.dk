@@ -42,7 +42,16 @@
   dawaAutocomplete.dawaAutocomplete(document.getElementById("mladresse"), {
     multiline: true,
     select: function(selected) {
-    	document.getElementById("valgtmladresse").innerHTML= selected.tekst;
+      document.getElementById("valgtmladresse").innerHTML= selected.tekst;
+      console.log('Selected address:');
+      console.dir(selected);
+    }
+  });
+
+  dawaAutocomplete.dawaAutocomplete(document.getElementById("initialiseretadresse"), {
+    addressId: "95697f98-a3d8-44c4-a16f-cddc8d29a3a1",
+    select: function(selected) {
+      document.getElementById("valgtinitialiseretadresse").innerHTML= selected.tekst;
       console.log('Selected address:');
       console.dir(selected);
     }
