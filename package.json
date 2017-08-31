@@ -1,6 +1,6 @@
 {
   "name": "autocomplete2.aws.dk",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -19,6 +19,6 @@
   "homepage": "https://github.com/DanmarksAdresser/autocomplete2.aws.dk#readme",
   "devDependencies": {},
   "dependencies": {
-    "dawa-autocomplete2": "latest"
+    "dawa-autocomplete2": "0.13.0"
   }
 }
